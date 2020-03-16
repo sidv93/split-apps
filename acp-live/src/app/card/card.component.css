@@ -1,0 +1,75 @@
+.Card {
+    display: inline-block;
+    width: 332px;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    margin: 16px;
+    box-sizing: border-box;
+    z-index: 100;
+    box-shadow: 0 0 20px 0 var(--box-shadow-color);
+}
+
+.Card__Animate {
+    animation: 0.6s cubic-bezier(0.15, 1, 0.33, 1) 0s 1 normal forwards running Cards_MoveUpAnimation;
+    animation-delay: 0s;
+    transition: all 0.3s cubic-bezier(0.15, 1, 0.33, 1) 0s;
+    animation-delay: 0.53s;
+    opacity: 0;
+    top: 60px;
+}
+
+@keyframes Cards_MoveUpAnimation {
+    0% {
+        top: 60px;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        top: 0px;
+        opacity: 1;
+    }
+}
+
+.Card:hover {
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.Card__Thumbnail {
+    height: 248px;
+}
+
+.Card__Desc {
+    height: 32px;
+    color: rgba(48, 48, 48);
+    background-color: rgba(245, 247, 255);
+    padding: 20px;
+}
+
+.Card__Title {
+    display: flex;
+    -moz-box-align: center;
+    -webkit-box-align: center;
+    font-family: Proxima Nova Semibold;
+    font-size: 18px;
+}
+
+.CardTitle__Text {
+    text-decoration: none !important;
+    margin-left: 10px;
+    height: 32px;
+    width: 224px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.Card__AppIcon {
+    height: 32px;
+    width: 32px;
+    object-fit: contain;
+}

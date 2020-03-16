@@ -1,0 +1,29 @@
+.Wrapper {
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  min-height: 100%;
+  width: 100%;
+}
+.Container {
+  display: flex;
+  -webkit-box-flex: 1;
+  flex: 1 1 auto;
+}
+.Content {
+  position: relative;
+  z-index: 1;
+  -webkit-box-flex: 1;
+  flex: 1 1 auto;
+  min-width: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
