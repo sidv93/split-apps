@@ -24,6 +24,8 @@ services:
       context: ./acp-live
     labels:
       - "traefik.http.routers.acp-live.rule=PathPrefix(`/acp-live`)"
+      - "traefik.http.routers.acp-live.middlewares=acp-live-stripprefix"
+      - "traefik.http.middlewares.acp-live-stripprefix.stripprefix.prefixes=/acp-live"
       - "traefik.enable=true"
 
   child-app:
@@ -32,6 +34,8 @@ services:
       context: ./child-app
     labels:
       - "traefik.http.routers.child-app.rule=PathPrefix(`/surveillance`)"
+      - "traefik.http.routers.child-app.middlewares=child-app-stripprefix"
+      - "traefik.http.middlewares.child-app-stripprefix.stripprefix.prefixes=/surveillance"
       - "traefik.enable=true"
 
   micro-frontend:
@@ -40,4 +44,6 @@ services:
       context: ./micro-frontend
     labels:
       - "traefik.http.routers.micro-frontend.rule=PathPrefix(`/dataanalysis`)"
+      - "traefik.http.routers.micro-frontend.middlewares=micro-frontend-stripprefix"
+      - "traefik.http.middlewares.micro-frontend-stripprefix.stripprefix.prefixes=/dataanalysis"
       - "traefik.enable=true"
