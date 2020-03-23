@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavToolComponent } from '../nav-tool/nav-tool.component';
 import { EventService } from '@parvathyg/services';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -50,6 +51,6 @@ export class DashboardComponent implements OnInit {
 
   navActionFromCard(route: string) {
     console.log('route receieved', route);
-    window.open(`http://localhost/${route}`, '_self');
+    window.open(`${environment.hostUrl}/${route}`, '_self');
   }
 }
