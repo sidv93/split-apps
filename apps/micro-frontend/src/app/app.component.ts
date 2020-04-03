@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ExternalComponent } from './external/external.component';
 import { EventService } from '@parvathyg/services';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -33,5 +34,6 @@ export class AppComponent {
 
   externalAction(data) {
     console.log('event from external component : ' + data);
+    window.open(`${environment.hostUrl}/acp-live`, '_self');
   }
 }

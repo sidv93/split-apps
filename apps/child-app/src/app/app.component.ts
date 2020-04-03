@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '@parvathyg/services';
 import { NavToolComponent } from './nav-tool/nav-tool.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -30,5 +31,6 @@ export class AppComponent implements OnInit {
   externalAction(data) {
     console.log('event from external component : ' + data);
     this.notification = data;
+    window.open(`${environment.hostUrl}/acp-live`, '_self');
   }
 }
