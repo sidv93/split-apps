@@ -25,6 +25,12 @@ export class DashboardComponent implements OnInit {
       route: 'dataanalysis',
       thumbnail: 'dataanalysis.webp',
       icon: 'dataanalysis.svg'
+    },
+    {
+      name: 'Cartis',
+      route: 'cartis',
+      thumbnail: 'cartis.webp',
+      icon: 'cartis.svg'
     }
   ];
 

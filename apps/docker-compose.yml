@@ -35,6 +35,17 @@ services:
     networks:
       - traefik_acp_network
 
+  react-app:
+    restart: on-failure
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/react-app:latest"
+    labels:
+      - "traefik.http.routers.react-app.rule=PathPrefix(`/cartis`)"
+      - "traefik.http.routers.react-app.middlewares=react-app-stripprefix"
+      - "traefik.http.middlewares.react-app-stripprefix.stripprefix.prefixes=/cartis"
+      - "traefik.enable=true"
+    networks:
+      - traefik_acp_network
+
 networks:
   traefik_acp_network:
     external: true
