@@ -53,6 +53,7 @@ export class DashboardComponent implements OnInit {
 
   externalAction(data) {
     console.log('event from external component : '+ data);
+    window.open(`${environment.hostUrl}/acp-live`, '_self');
   }
 
   navActionFromCard(route: string) {
