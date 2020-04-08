@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --baseHref=/surveillance/",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "deploy": "node server.js"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -20,10 +19,8 @@
     "@angular/platform-browser": "~9.0.3",
     "@angular/platform-browser-dynamic": "~9.0.3",
     "@angular/router": "~9.0.3",
-    "@parvathyg/nav": "0.0.1",
+    "@parvathyg/navigation": "0.0.12",
     "@parvathyg/services": "0.0.1",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

@@ -22,6 +22,9 @@ export class AppComponent implements OnInit {
 
   public onNavAction(action) {
     console.log("Received event from nav-component - " + action);
+    if (action === 'home') {
+      window.open(`${environment.hostUrl}/acp-live`, "_self");
+    }
   }
 
   filterNotification(data) {
@@ -31,6 +34,6 @@ export class AppComponent implements OnInit {
   externalAction(data) {
     console.log('event from external component : ' + data);
     this.notification = data;
-    window.open(`${environment.hostUrl}/acp-live`, '_self');
+    // window.open(`${environment.hostUrl}/acp-live`, '_self');
   }
 }

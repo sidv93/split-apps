@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { NavModule } from '@parvathyg/nav';
+import { NavigationModule } from '@parvathyg/navigation';
 import { ServicesModule } from '@parvathyg/services';
 import { NavToolComponent } from './nav-tool/nav-tool.component';
 
@@ -14,7 +14,7 @@ import { NavToolComponent } from './nav-tool/nav-tool.component';
   imports: [
     BrowserModule,
     ServicesModule,
-    NavModule
+    NavigationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

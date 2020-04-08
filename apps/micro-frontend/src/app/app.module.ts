@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { ServicesModule } from '@parvathyg/services';
-import { NavModule } from '@parvathyg/nav';
+import { NavigationModule } from '@parvathyg/navigation';
 import { ExternalComponent } from './external/external.component';
 
 @NgModule({
@@ -14,7 +14,7 @@ import { ExternalComponent } from './external/external.component';
   ],
   imports: [
     BrowserModule,
-    NavModule,
+    NavigationModule,
     ServicesModule
   ],
   providers: [],

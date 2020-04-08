@@ -1,6 +1,6 @@
 <div class="Wrapper">
   <div class="Container">
-    <lib-nav [externalComponents]="navTools"></lib-nav>
+    <lib-navigation (onNavAction)="onNavAction($event)" [externalComponents]="navTools"></lib-navigation>
     <div class="Content">
       <p>Angular(v9) application using nav library</p>
       <p>Notification: {{notification}}</p>
