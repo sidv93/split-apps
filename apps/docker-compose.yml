@@ -4,7 +4,7 @@ services:
 
   acp-live:
     restart: on-failure
-    image: "genesisPlatformTestRegistry.azurecr.io/poc/acp-live:latest"
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/acp-live:v1"
     labels:
       - "traefik.http.routers.acp-live.rule=PathPrefix(`/acp-live`)"
       - "traefik.http.routers.acp-live.middlewares=acp-live-stripprefix"
@@ -15,7 +15,7 @@ services:
 
   child-app:
     restart: on-failure
-    image: "genesisPlatformTestRegistry.azurecr.io/poc/child-app:latest"
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/child-app:v1"
     labels:
       - "traefik.http.routers.child-app.rule=PathPrefix(`/surveillance`)"
       - "traefik.http.routers.child-app.middlewares=child-app-stripprefix"
@@ -26,7 +26,7 @@ services:
 
   micro-frontend:
     restart: on-failure
-    image: "genesisPlatformTestRegistry.azurecr.io/poc/micro-frontend:latest"
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/micro-frontend:v1"
     labels:
       - "traefik.http.routers.micro-frontend.rule=PathPrefix(`/dataanalysis`)"
       - "traefik.http.routers.micro-frontend.middlewares=micro-frontend-stripprefix"
@@ -42,6 +42,17 @@ services:
       - "traefik.http.routers.react-app.rule=PathPrefix(`/cartis`)"
       - "traefik.http.routers.react-app.middlewares=react-app-stripprefix"
       - "traefik.http.middlewares.react-app-stripprefix.stripprefix.prefixes=/cartis"
+      - "traefik.enable=true"
+    networks:
+      - traefik_acp_network
+
+  acp-video:
+    restart: on-failure
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/acp-video-parvathy:latest"
+    labels:
+      - "traefik.http.routers.acp-video.rule=PathPrefix(`/test-app`)"
+      - "traefik.http.routers.acp-video.middlewares=acp-video-stripprefix"
+      - "traefik.http.middlewares.acp-video-stripprefix.stripprefix.prefixes=/test-app"
       - "traefik.enable=true"
     networks:
       - traefik_acp_network
