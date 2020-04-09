@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '@parvathyg/services';
 import { NavToolComponent } from './nav-tool/nav-tool.component';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +22,7 @@ export class AppComponent implements OnInit {
   public onNavAction(action) {
     console.log("Received event from nav-component - " + action);
     if (action === 'home') {
-      window.open(`${environment.hostUrl}/acp-live`, "_self");
+      window.open(window['homeUrl'], "_self");
     }
   }
 

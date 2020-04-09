@@ -20,6 +20,7 @@ services:
     image: "genesisPlatformTestRegistry.azurecr.io/poc/child-app:v2"
     environment:
       - BASE_HREF=${SURVEILLANCE_BASE_HREF}
+      - HOME_URL=${HOME_URL}
     labels:
       - "traefik.http.routers.${SURVEILLANCE_BASE_HREF}.rule=PathPrefix(`/${SURVEILLANCE_BASE_HREF}`)"
       - "traefik.http.routers.${SURVEILLANCE_BASE_HREF}.middlewares=${SURVEILLANCE_BASE_HREF}-stripprefix"
@@ -33,6 +34,7 @@ services:
     image: "genesisPlatformTestRegistry.azurecr.io/poc/micro-frontend:v2"
     environment:
       - BASE_HREF=${DATA_ANALYSIS_BASE_HREF}
+      - HOME_URL=${HOME_URL}
     labels:
       - "traefik.http.routers.${DATA_ANALYSIS_BASE_HREF}.rule=PathPrefix(`/${DATA_ANALYSIS_BASE_HREF}`)"
       - "traefik.http.routers.${DATA_ANALYSIS_BASE_HREF}.middlewares=${DATA_ANALYSIS_BASE_HREF}-stripprefix"
@@ -46,6 +48,7 @@ services:
     image: "genesisPlatformTestRegistry.azurecr.io/poc/react-app:v2"
     environment:
       - BASE_HREF=${CARTIS_BASE_HREF}
+      - HOME_URL=${HOME_URL}
     labels:
       - "traefik.http.routers.${CARTIS_BASE_HREF}.rule=PathPrefix(`/${CARTIS_BASE_HREF}`)"
       - "traefik.http.routers.${CARTIS_BASE_HREF}.middlewares=${CARTIS_BASE_HREF}-stripprefix"
