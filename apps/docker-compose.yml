@@ -2,17 +2,6 @@ version: '2.1'
 
 services:
 
-  # acp-live:
-  #   restart: on-failure
-  #   image: "genesisPlatformTestRegistry.azurecr.io/poc/acp-live:v1"
-  #   labels:
-  #     - "traefik.http.routers.acp-live.rule=PathPrefix(`/acp-live`)"
-  #     - "traefik.http.routers.acp-live.middlewares=acp-live-stripprefix"
-  #     - "traefik.http.middlewares.acp-live-stripprefix.stripprefix.prefixes=/acp-live"
-  #     - "traefik.enable=true"
-  #   networks:
-  #     - traefik_acp_network
-
   acp-live:
     restart: on-failure
     image: "genesisPlatformTestRegistry.azurecr.io/poc/acp-live:v2"
@@ -25,17 +14,6 @@ services:
       - "traefik.enable=true"
     networks:
       - traefik_acp_network
-
-  # child-app:
-  #   restart: on-failure
-  #   image: "genesisPlatformTestRegistry.azurecr.io/poc/child-app:v1"
-  #   labels:
-  #     - "traefik.http.routers.child-app.rule=PathPrefix(`/surveillance`)"
-  #     - "traefik.http.routers.child-app.middlewares=child-app-stripprefix"
-  #     - "traefik.http.middlewares.child-app-stripprefix.stripprefix.prefixes=/surveillance"
-  #     - "traefik.enable=true"
-  #   networks:
-  #     - traefik_acp_network
 
   child-app:
     restart: on-failure
@@ -50,17 +28,6 @@ services:
     networks:
       - traefik_acp_network
 
-  # micro-frontend:
-  #   restart: on-failure
-  #   image: "genesisPlatformTestRegistry.azurecr.io/poc/micro-frontend:v2"
-  #   labels:
-  #     - "traefik.http.routers.micro-frontend.rule=PathPrefix(`/dataanalysis`)"
-  #     - "traefik.http.routers.micro-frontend.middlewares=micro-frontend-stripprefix"
-  #     - "traefik.http.middlewares.micro-frontend-stripprefix.stripprefix.prefixes=/dataanalysis"
-  #     - "traefik.enable=true"
-  #   networks:
-  #     - traefik_acp_network
-
   micro-frontend:
     restart: on-failure
     image: "genesisPlatformTestRegistry.azurecr.io/poc/micro-frontend:v2"
@@ -73,17 +40,6 @@ services:
       - "traefik.enable=true"
     networks:
       - traefik_acp_network
-
-  # react-app:
-  #   restart: on-failure
-  #   image: "genesisPlatformTestRegistry.azurecr.io/poc/react-app:latest"
-  #   labels:
-  #     - "traefik.http.routers.react-app.rule=PathPrefix(`/cartis`)"
-  #     - "traefik.http.routers.react-app.middlewares=react-app-stripprefix"
-  #     - "traefik.http.middlewares.react-app-stripprefix.stripprefix.prefixes=/cartis"
-  #     - "traefik.enable=true"
-  #   networks:
-  #     - traefik_acp_network
 
   react-app:
     restart: on-failure
