@@ -13,35 +13,74 @@ services:
     networks:
       - traefik_acp_network
 
+  # child-app:
+  #   restart: on-failure
+  #   image: "genesisPlatformTestRegistry.azurecr.io/poc/child-app:v1"
+  #   labels:
+  #     - "traefik.http.routers.child-app.rule=PathPrefix(`/surveillance`)"
+  #     - "traefik.http.routers.child-app.middlewares=child-app-stripprefix"
+  #     - "traefik.http.middlewares.child-app-stripprefix.stripprefix.prefixes=/surveillance"
+  #     - "traefik.enable=true"
+  #   networks:
+  #     - traefik_acp_network
+
   child-app:
     restart: on-failure
-    image: "genesisPlatformTestRegistry.azurecr.io/poc/child-app:v1"
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/child-app:v2"
+    environment:
+      - SURVEILLANCE_BASE_HREF=${SURVEILLANCE_BASE_HREF}
     labels:
-      - "traefik.http.routers.child-app.rule=PathPrefix(`/surveillance`)"
-      - "traefik.http.routers.child-app.middlewares=child-app-stripprefix"
-      - "traefik.http.middlewares.child-app-stripprefix.stripprefix.prefixes=/surveillance"
+      - "traefik.http.routers.${SURVEILLANCE_BASE_HREF}.rule=PathPrefix(`/${SURVEILLANCE_BASE_HREF}`)"
+      - "traefik.http.routers.${SURVEILLANCE_BASE_HREF}.middlewares=${SURVEILLANCE_BASE_HREF}-stripprefix"
+      - "traefik.http.middlewares.${SURVEILLANCE_BASE_HREF}-stripprefix.stripprefix.prefixes=/${SURVEILLANCE_BASE_HREF}"
       - "traefik.enable=true"
     networks:
       - traefik_acp_network
+
+  # micro-frontend:
+  #   restart: on-failure
+  #   image: "genesisPlatformTestRegistry.azurecr.io/poc/micro-frontend:v2"
+  #   labels:
+  #     - "traefik.http.routers.micro-frontend.rule=PathPrefix(`/dataanalysis`)"
+  #     - "traefik.http.routers.micro-frontend.middlewares=micro-frontend-stripprefix"
+  #     - "traefik.http.middlewares.micro-frontend-stripprefix.stripprefix.prefixes=/dataanalysis"
+  #     - "traefik.enable=true"
+  #   networks:
+  #     - traefik_acp_network
 
   micro-frontend:
     restart: on-failure
-    image: "genesisPlatformTestRegistry.azurecr.io/poc/micro-frontend:v1"
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/micro-frontend:v2"
+    environment:
+      - DATA_ANALYSIS_BASE_HREF=${DATA_ANALYSIS_BASE_HREF}
     labels:
-      - "traefik.http.routers.micro-frontend.rule=PathPrefix(`/dataanalysis`)"
-      - "traefik.http.routers.micro-frontend.middlewares=micro-frontend-stripprefix"
-      - "traefik.http.middlewares.micro-frontend-stripprefix.stripprefix.prefixes=/dataanalysis"
+      - "traefik.http.routers.${DATA_ANALYSIS_BASE_HREF}.rule=PathPrefix(`/${DATA_ANALYSIS_BASE_HREF}`)"
+      - "traefik.http.routers.${DATA_ANALYSIS_BASE_HREF}.middlewares=${DATA_ANALYSIS_BASE_HREF}-stripprefix"
+      - "traefik.http.middlewares.${DATA_ANALYSIS_BASE_HREF}-stripprefix.stripprefix.prefixes=/${DATA_ANALYSIS_BASE_HREF}"
       - "traefik.enable=true"
     networks:
       - traefik_acp_network
 
+  # react-app:
+  #   restart: on-failure
+  #   image: "genesisPlatformTestRegistry.azurecr.io/poc/react-app:latest"
+  #   labels:
+  #     - "traefik.http.routers.react-app.rule=PathPrefix(`/cartis`)"
+  #     - "traefik.http.routers.react-app.middlewares=react-app-stripprefix"
+  #     - "traefik.http.middlewares.react-app-stripprefix.stripprefix.prefixes=/cartis"
+  #     - "traefik.enable=true"
+  #   networks:
+  #     - traefik_acp_network
+
   react-app:
     restart: on-failure
-    image: "genesisPlatformTestRegistry.azurecr.io/poc/react-app:latest"
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/react-app:v2"
+    environment:
+      - CARTIS_BASE_HREF=${CARTIS_BASE_HREF}
     labels:
-      - "traefik.http.routers.react-app.rule=PathPrefix(`/cartis`)"
-      - "traefik.http.routers.react-app.middlewares=react-app-stripprefix"
-      - "traefik.http.middlewares.react-app-stripprefix.stripprefix.prefixes=/cartis"
+      - "traefik.http.routers.${CARTIS_BASE_HREF}.rule=PathPrefix(`/${CARTIS_BASE_HREF}`)"
+      - "traefik.http.routers.${CARTIS_BASE_HREF}.middlewares=${CARTIS_BASE_HREF}-stripprefix"
+      - "traefik.http.middlewares.${CARTIS_BASE_HREF}-stripprefix.stripprefix.prefixes=/${CARTIS_BASE_HREF}"
       - "traefik.enable=true"
     networks:
       - traefik_acp_network
