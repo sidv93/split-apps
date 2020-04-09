@@ -2,13 +2,26 @@ version: '2.1'
 
 services:
 
+  # acp-live:
+  #   restart: on-failure
+  #   image: "genesisPlatformTestRegistry.azurecr.io/poc/acp-live:v1"
+  #   labels:
+  #     - "traefik.http.routers.acp-live.rule=PathPrefix(`/acp-live`)"
+  #     - "traefik.http.routers.acp-live.middlewares=acp-live-stripprefix"
+  #     - "traefik.http.middlewares.acp-live-stripprefix.stripprefix.prefixes=/acp-live"
+  #     - "traefik.enable=true"
+  #   networks:
+  #     - traefik_acp_network
+
   acp-live:
     restart: on-failure
-    image: "genesisPlatformTestRegistry.azurecr.io/poc/acp-live:v1"
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/acp-live:v2"
+    environment:
+      - BASE_HREF=${ACP_LIVE_BASE_HREF}
     labels:
-      - "traefik.http.routers.acp-live.rule=PathPrefix(`/acp-live`)"
-      - "traefik.http.routers.acp-live.middlewares=acp-live-stripprefix"
-      - "traefik.http.middlewares.acp-live-stripprefix.stripprefix.prefixes=/acp-live"
+      - "traefik.http.routers.${ACP_LIVE_BASE_HREF}.rule=PathPrefix(`/${ACP_LIVE_BASE_HREF}`)"
+      - "traefik.http.routers.${ACP_LIVE_BASE_HREF}.middlewares=${ACP_LIVE_BASE_HREF}-stripprefix"
+      - "traefik.http.middlewares.${ACP_LIVE_BASE_HREF}-stripprefix.stripprefix.prefixes=/${ACP_LIVE_BASE_HREF}"
       - "traefik.enable=true"
     networks:
       - traefik_acp_network
@@ -28,7 +41,7 @@ services:
     restart: on-failure
     image: "genesisPlatformTestRegistry.azurecr.io/poc/child-app:v2"
     environment:
-      - SURVEILLANCE_BASE_HREF=${SURVEILLANCE_BASE_HREF}
+      - BASE_HREF=${SURVEILLANCE_BASE_HREF}
     labels:
       - "traefik.http.routers.${SURVEILLANCE_BASE_HREF}.rule=PathPrefix(`/${SURVEILLANCE_BASE_HREF}`)"
       - "traefik.http.routers.${SURVEILLANCE_BASE_HREF}.middlewares=${SURVEILLANCE_BASE_HREF}-stripprefix"
@@ -52,7 +65,7 @@ services:
     restart: on-failure
     image: "genesisPlatformTestRegistry.azurecr.io/poc/micro-frontend:v2"
     environment:
-      - DATA_ANALYSIS_BASE_HREF=${DATA_ANALYSIS_BASE_HREF}
+      - BASE_HREF=${DATA_ANALYSIS_BASE_HREF}
     labels:
       - "traefik.http.routers.${DATA_ANALYSIS_BASE_HREF}.rule=PathPrefix(`/${DATA_ANALYSIS_BASE_HREF}`)"
       - "traefik.http.routers.${DATA_ANALYSIS_BASE_HREF}.middlewares=${DATA_ANALYSIS_BASE_HREF}-stripprefix"
@@ -76,22 +89,11 @@ services:
     restart: on-failure
     image: "genesisPlatformTestRegistry.azurecr.io/poc/react-app:v2"
     environment:
-      - CARTIS_BASE_HREF=${CARTIS_BASE_HREF}
+      - BASE_HREF=${CARTIS_BASE_HREF}
     labels:
       - "traefik.http.routers.${CARTIS_BASE_HREF}.rule=PathPrefix(`/${CARTIS_BASE_HREF}`)"
       - "traefik.http.routers.${CARTIS_BASE_HREF}.middlewares=${CARTIS_BASE_HREF}-stripprefix"
       - "traefik.http.middlewares.${CARTIS_BASE_HREF}-stripprefix.stripprefix.prefixes=/${CARTIS_BASE_HREF}"
-      - "traefik.enable=true"
-    networks:
-      - traefik_acp_network
-
-  acp-video:
-    restart: on-failure
-    image: "genesisPlatformTestRegistry.azurecr.io/poc/acp-video-parvathy:latest"
-    labels:
-      - "traefik.http.routers.acp-video.rule=PathPrefix(`/test-app`)"
-      - "traefik.http.routers.acp-video.middlewares=acp-video-stripprefix"
-      - "traefik.http.middlewares.acp-video-stripprefix.stripprefix.prefixes=/test-app"
       - "traefik.enable=true"
     networks:
       - traefik_acp_network
