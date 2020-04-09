@@ -17,7 +17,7 @@ services:
 
   child-app:
     restart: on-failure
-    image: "genesisPlatformTestRegistry.azurecr.io/poc/child-app:v2"
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/child-app:v3"
     environment:
       - BASE_HREF=${SURVEILLANCE_BASE_HREF}
       - HOME_URL=${HOME_URL}
@@ -31,7 +31,7 @@ services:
 
   micro-frontend:
     restart: on-failure
-    image: "genesisPlatformTestRegistry.azurecr.io/poc/micro-frontend:v2"
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/micro-frontend:v3"
     environment:
       - BASE_HREF=${DATA_ANALYSIS_BASE_HREF}
       - HOME_URL=${HOME_URL}
@@ -45,7 +45,7 @@ services:
 
   react-app:
     restart: on-failure
-    image: "genesisPlatformTestRegistry.azurecr.io/poc/react-app:v2"
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/react-app:v3"
     environment:
       - BASE_HREF=${CARTIS_BASE_HREF}
       - HOME_URL=${HOME_URL}
