@@ -58,6 +58,6 @@ export class DashboardComponent implements OnInit {
 
   navActionFromCard(route: string) {
     console.log('route receieved', route);
-    window.open(`${environment.hostUrl}/${route}`, '_self');
+    window.open(`/${route}`, '_self');
   }
 }

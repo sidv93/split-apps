@@ -4,9 +4,10 @@ services:
 
   acp-live:
     restart: on-failure
-    image: "genesisPlatformTestRegistry.azurecr.io/poc/acp-live:v2"
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/acp-live:v3"
     environment:
       - BASE_HREF=${ACP_LIVE_BASE_HREF}
+      - HOME_URL=${HOME_URL}
     labels:
       - "traefik.http.routers.${ACP_LIVE_BASE_HREF}.rule=PathPrefix(`/${ACP_LIVE_BASE_HREF}`)"
       - "traefik.http.routers.${ACP_LIVE_BASE_HREF}.middlewares=${ACP_LIVE_BASE_HREF}-stripprefix"
@@ -25,6 +26,20 @@ services:
       - "traefik.http.routers.${SURVEILLANCE_BASE_HREF}.rule=PathPrefix(`/${SURVEILLANCE_BASE_HREF}`)"
       - "traefik.http.routers.${SURVEILLANCE_BASE_HREF}.middlewares=${SURVEILLANCE_BASE_HREF}-stripprefix"
       - "traefik.http.middlewares.${SURVEILLANCE_BASE_HREF}-stripprefix.stripprefix.prefixes=/${SURVEILLANCE_BASE_HREF}"
+      - "traefik.enable=true"
+    networks:
+      - traefik_acp_network
+
+  child-app-v4:
+    restart: on-failure
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/child-app:v4"
+    environment:
+      - BASE_HREF=v4/${SURVEILLANCE_BASE_HREF}
+      - HOME_URL=${HOME_URL}
+    labels:
+      - "traefik.http.routers.v4-${SURVEILLANCE_BASE_HREF}.rule=PathPrefix(`/v4/${SURVEILLANCE_BASE_HREF}`)"
+      - "traefik.http.routers.v4-${SURVEILLANCE_BASE_HREF}.middlewares=v4-${SURVEILLANCE_BASE_HREF}-stripprefix"
+      - "traefik.http.middlewares.v4-${SURVEILLANCE_BASE_HREF}-stripprefix.stripprefix.prefixes=/v4/${SURVEILLANCE_BASE_HREF}"
       - "traefik.enable=true"
     networks:
       - traefik_acp_network
@@ -56,6 +71,17 @@ services:
       - "traefik.enable=true"
     networks:
       - traefik_acp_network
+
+  demo-app:
+    restart: on-failure
+    image: "genesisPlatformTestRegistry.azurecr.io/poc/app1-parvathy:v2"
+    labels:
+      - "traefik.http.routers.demo-app.rule=PathPrefix(`/test-app`)"
+      - "traefik.http.routers.demo-app.middlewares=demo-app-stripprefix"
+      - "traefik.http.middlewares.demo-app-stripprefix.stripprefix.prefixes=/test-app"
+      - "traefik.enable=true"
+    networks:
+          - traefik_acp_network
 
 networks:
   traefik_acp_network:
